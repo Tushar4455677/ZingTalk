@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferences Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(120deg, #1a1a1a, #222);
+            font-family: Arial, sans-serif;
+        }
+
+        .form-box {
+            position: relative;
+            width: 450px;
+            background: #1c1c1c;
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-box::before,
+        .form-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(120deg, transparent, #ff2770, #45f3ff);
+            z-index: -1;
+            animation: rotate 6s linear infinite;
+        }
+
+        .form-box::after {
+            animation-delay: -3s;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        form {
+            background: #222;
+            padding: 40px;
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        form h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .inputbox {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .inputbox select,
+        .inputbox input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            color:#ff2770;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #8f8f8f;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .inputbox select:focus,
+        .inputbox input:focus {
+            border-color: #45f3ff;
+        }
+
+        .inputbox label {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            font-size: 0.9rem;
+            color: #45f3ff;
+            pointer-events: none;
+        }
+
+        .checkbox-group {
+            margin: 15px 0;
+        }
+
+        .checkbox-group label {
+            display: block;
+            font-size: 1rem;
+            color: #8f8f8f;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: linear-gradient(90deg, #ff2770, #45f3ff);
+            color: #fff;
+            font-size: 1rem;
+            text-transform: uppercase;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-box">
+        <form>
+            <h2>Preferences</h2>
+
+            <!-- Privacy Settings -->
+            <div class="inputbox">
+                <select required>
+                    <option value="" disabled selected>Privacy Settings</option>
+                    <option value="public">Public Profile</option>
+                    <option value="private">Private Profile</option>
+                </select>
+                <label>Profile Visibility</label>
+            </div>
+
+            <div class="inputbox">
+                <select required>
+                    <option value="" disabled selected>Who can send friend requests?</option>
+                    <option value="everyone">Everyone</option>
+                    <option value="friends">Friends of Friends</option>
+                    <option value="no_one">No One</option>
+                </select>
+                <label>Friend Request Settings</label>
+            </div>
+
+            <div class="inputbox">
+                <select required>
+                    <option value="" disabled selected>Who can see posts?</option>
+                    <option value="public">Public</option>
+                    <option value="friends">Friends</option>
+                    <option value="only_me">Only Me</option>
+                </select>
+                <label>Post Visibility</label>
+            </div>
+
+            <!-- Content Preferences -->
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="categories" value="Tech"> Tech
+                </label>
+                <label>
+                    <input type="checkbox" name="categories" value="Sports"> Sports
+                </label>
+                <label>
+                    <input type="checkbox" name="categories" value="Travel"> Travel
+                </label>
+                <label>
+                    <input type="checkbox" name="categories" value="Music"> Music
+                </label>
+                <label>
+                    <input type="checkbox" name="categories" value="Fitness"> Fitness
+                </label>
+            </div>
+
+            <button type="submit">Save Preferences</button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(120deg, #23242a, #1c1c1c);
+            font-family: Arial, sans-serif;
+        }
+
+        .form-box {
+            position: relative;
+            width: 400px;
+            background: #1c1c1c;
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 20px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+            height: 500px;
+        }
+
+        .form-box::before,
+        .form-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(120deg, transparent, #ff2770, #45f3ff);
+            z-index: -1;
+            animation: rotate 6s linear infinite;
+        }
+
+        .form-box::after {
+            animation-delay: -3s;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        form {
+            background: #222;
+            padding: 40px;
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        form h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .inputbox {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .inputbox input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            color: #fff;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #8f8f8f;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .inputbox input:focus,
+        .inputbox input:valid {
+            border-color: #45f3ff;
+        }
+
+        .inputbox label {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #8f8f8f;
+            pointer-events: none;
+            transition: transform 0.3s ease, font-size 0.3s ease;
+        }
+
+        .inputbox input:focus ~ label,
+        .inputbox input:valid ~ label {
+            transform: translateY(-120%);
+            font-size: 0.8rem;
+            color: #45f3ff;
+        }
+
+        .inputbox i {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff2770, #45f3ff);
+            transition: height 0.3s ease;
+        }
+
+        .inputbox input:focus ~ i {
+            height: 4px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: linear-gradient(90deg, #ff2770, #45f3ff);
+            color: #fff;
+            font-size: 1rem;
+            text-transform: uppercase;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-box">
+        <form>
+            <h2>Contact Information</h2>
+
+            <div class="inputbox">
+                <input type="url" required>
+                <label>LinkedIn Profile</label>
+                <i></i>
+            </div>
+
+            <div class="inputbox">
+                <input type="url" required>
+                <label>Instagram Link</label>
+                <i></i>
+            </div>
+
+            <div class="inputbox">
+                <input type="url" required>
+                <label>Twitter Link</label>
+                <i></i>
+            </div>
+
+            <div class="inputbox">
+                <input type="email" required>
+                <label>Contact Email</label>
+                <i></i>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

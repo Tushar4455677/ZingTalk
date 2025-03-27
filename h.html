@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Login</title>
+    <style>
+        /* Popup Styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 300px;
+        }
+        .popup input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .popup button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+        #successMessage {
+            color: green;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Open Popup Button -->
+    <button id="openPopup">Open Login</button>
+
+    <!-- Login Popup -->
+    <div class="popup" id="popup">
+        <span class="close-btn" id="closePopup">&times;</span>
+        <h2>Login</h2>
+        
+        <div id="successMessage"></div>
+        
+        <form id="customSignupForm">
+            <input type="email" id="customEmail" name="email" placeholder="Enter your email" required>
+            <div class="error" id="erroremail"></div>
+
+            <input type="password" id="customPassword" name="password" placeholder="Enter your password" required>
+            <div class="error" id="errorpass"></div>
+
+            <button type="button" id="customSubmit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let openPopup = document.getElementById("openPopup");
+            let closePopup = document.getElementById("closePopup");
+            let popup = document.getElementById("popup");
+
+            // Open Popup
+            openPopup.addEventListener("click", function () {
+                popup.style.display = "block";
+            });
+
+            // Close Popup
+            closePopup.addEventListener("click", function () {
+                popup.style.display = "none";
+            });
+
+            // Close Popup when clicking outside
+            window.addEventListener("click", function (event) {
+                if (event.target === popup) {
+                    popup.style.display = "none";
+                }
+            });
+
+            // AJAX Login
+            document.getElementById("customSubmit").addEventListener("click", function () {
+                var email = document.getElementById("customEmail").value;
+                var password = document.getElementById("customPassword").value;
+                var successMessage = document.getElementById("successMessage");
+                var errorEmail = document.getElementById("erroremail");
+                var errorPass = document.getElementById("errorpass");
+
+                // Reset error messages
+                errorEmail.style.display = "none";
+                errorPass.style.display = "none";
+                successMessage.style.display = "none";
+
+                // Validation
+                if (email === "") {
+                    errorEmail.innerText = "⚠ Please enter your email";
+                    errorEmail.style.display = "block";
+                    return;
+                }
+
+                if (password === "") {
+                    errorPass.innerText = "⚠ Please enter your password";
+                    errorPass.style.display = "block";
+                    return;
+                }
+
+                // Create AJAX request
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "login.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        if (xhr.responseText.trim() === "success") {
+                            successMessage.innerText = "✅ Login successful! Redirecting...";
+                            successMessage.style.display = "block";
+                            setTimeout(function () {
+                                window.location.href = "complete.html";
+                            }, 2000);
+                        } else {
+                            errorPass.innerText = "❌ Invalid email or password";
+                            errorPass.style.display = "block";
+                        }
+                    }
+                };
+
+                xhr.send("email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password));
+            });
+        });
+    </script>
+
+</body>
+</html>

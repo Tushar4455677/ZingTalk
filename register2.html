@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Setup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1c1c1c, #323232);
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            background: #222;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 600px;
+            height: 700px;
+        }
+
+        h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            color: #ccc;
+            font-size: 0.9rem;
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            background: transparent;
+            border: 2px solid #444;
+            color:rgb(191, 12, 72);
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #45f3ff;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:valid + label,
+        .form-group select:focus + label,
+        .form-group select:valid + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:valid + label {
+            top: -10px;
+            font-size: 0.75rem;
+            color: #45f3ff;
+        }
+
+        #tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: #333;
+            padding: 8px;
+            border: 2px solid #444;
+            border-radius: 8px;
+        }
+
+        #tags span {
+            background: #444;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        #tags span i {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .form-group input[type="file"] {
+            padding: 5px;
+        }
+
+        .form-group input[type="submit"] {
+            background: #45f3ff;
+            color: #222;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background: #3acde8;
+        }
+
+        .form-group textarea {
+            resize: none;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Complete Your Profile</h2>
+        <form>
+            <!-- Profile Picture -->
+            <div class="form-group">
+                <label for="profilePicture" style="position: absolute;left: 400px;">Add Profile picture</label>
+                <input type="file" id="profilePicture" accept="image/*" required>
+               
+            </div><br>
+
+            <!-- Bio -->
+            <div class="form-group">
+                <textarea id="bio" rows="3" maxlength="150" required></textarea>
+                <label for="bio">Short Bio (max 150 characters)</label>
+            </div><br>
+
+            <!-- Location -->
+            <div class="form-group">
+                <input type="text" id="location" required>
+                <label for="location">Location (City, State, or Country)</label>
+            </div><br>
+
+            <!-- Interests/Hobbies -->
+            <div class="form-group">
+                <div id="tags">
+                    <input type="text" id="tagInput" placeholder="Add interests...">
+                </div>
+            </div><br>
+
+            <!-- Profession -->
+            <div class="form-group">
+                <select id="profession" required>
+                    <option value="" disabled selected></option>
+                    <option value="Student">Student</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Self-Employed">Self-Employed</option>
+                </select>
+                <label for="profession">Profession</label>
+            </div><br><br>
+
+            <!-- Website/Portfolio -->
+            <div class="form-group">
+                <input type="url" id="portfolio">
+                <label for="portfolio">Portfolio/Website Link (Optional)</label>
+            </div><br>
+
+            <!-- Submit -->
+            <div class="form-group">
+                <input type="submit" value="Save Profile">
+            </div>
+        </form>
+    </div><br>
+
+    <script>
+        const tagInput = document.getElementById("tagInput");
+        const tagsDiv = document.getElementById("tags");
+
+        tagInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" && tagInput.value.trim() !== "") {
+                e.preventDefault();
+                const tag = document.createElement("span");
+                tag.innerHTML = `${tagInput.value} <i>&times;</i>`;
+                tag.querySelector("i").addEventListener("click", () => tag.remove());
+                tagsDiv.insertBefore(tag, tagInput);
+                tagInput.value = "";
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: black;
+        }
+        .sidebar {
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #dbdbdb;
+            padding: 20px;
+            position: fixed;
+            width: 250px;
+            left: -250px;  /* Initially hidden */
+            transition: left 0.3s ease-in-out;
+            z-index: 1000;
+        }
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .sidebar a:hover {
+            background: lightskyblue;
+        }
+        .sidebar a i {
+            font-size: 22px;
+        }
+        /* Show Sidebar on Mobile */
+        .sidebar.show {
+            left: 0;
+        }
+        /* Close Button */
+        .close-btn {
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+        /* Toggle Button */
+        .toggle-btn {
+            font-size: 28px;
+            color: white;
+            background: none;
+            border: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            cursor: pointer;
+            z-index: 1100;
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                left: 0;
+            }
+            .toggle-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Toggle Button -->
+<button class="toggle-btn" id="toggleBtn"><i class="fa-solid fa-bars"></i></button>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <button class="close-btn" id="closeBtn">&times;</button>
+    <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="#" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+    <a href="fetch_posts.php"><i class="fa-solid fa-clapperboard"></i> Reels And Posts</a>
+    <a href="#"><i class="fa-solid fa-envelope"></i> Messages</a>
+    <a href="notification.php"><i class="fa-solid fa-heart"></i> Notifications</a>
+    <a href="#"><i class="fa-solid fa-plus-square"></i> Create Story</a>
+    <a href="profile.php"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="settings.php"><i class="fa-solid fa-gear"></i> Settings</a>
+    <a href="#"><i class="fa-solid fa-plus-square"></i> Create Post</a>
+    <a href="#"><i class="fa-solid fa-triangle-exclamation"></i> Report a Problem</a>
+</div>
+
+<!-- JavaScript -->
+<script>
+    const toggleBtn = document.getElementById("toggleBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const sidebar = document.getElementById("sidebar");
+
+    toggleBtn.addEventListener("click", () => {
+        sidebar.classList.add("show");
+    });
+
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.remove("show");
+    });
+</script>
+
+</body>
+</html>
